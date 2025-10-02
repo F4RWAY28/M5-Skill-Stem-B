@@ -15,9 +15,11 @@ public class jumpingBlock : MonoBehaviour
 
     private Vector3 gravity;
 
+    [SerializeField] private float t;
+
     enum State {onGround, inTheAir};
 
-    State myState = State.ground;
+    State myState = State.onGround;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,7 +32,7 @@ public class jumpingBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    if( == State.ground)
+    if(myState == State.onGround)
     {
         velocity = Vector3.zero;
 
@@ -40,21 +42,24 @@ public class jumpingBlock : MonoBehaviour
         {
             myState = State.inTheAir;
 
-            velocity = velocityBegin;
+            velocity = maxJumpingHeight;
             gravity = gravityBegin;
-            myState = State.airborne;
+            myState = State.inTheAir;
         }   
     }
     
     if(myState == State.inTheAir)
      {
-        if(Block.position.y < 0)
+            
+        t += Time.deltaTime;
+
+       if (Block.position.y < yBegin)
         {
 
             velocity = Vector3.zero;
              gravity = Vector3.zero;
 
-            myState = State.ground;
+            myState = State.onGround;
         }
         
      }
