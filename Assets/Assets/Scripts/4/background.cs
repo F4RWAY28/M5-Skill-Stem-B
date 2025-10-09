@@ -1,0 +1,18 @@
+using UnityEngine;
+
+public class background : MonoBehaviour
+{
+    [SerializeField] Renderer bgBackground;
+    [SerializeField] float speed = 2;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        bgBackground.material.mainTextureOffset += new Vector2(speed * Time.deltaTime, 0);
+    }
+}
